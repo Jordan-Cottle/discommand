@@ -1,0 +1,15 @@
+[run]
+source = discommand, tests
+
+[report]
+
+fail_under = 100
+
+include = discommand/*
+
+show_missing = true
+
+sort = -miss
+
+exclude_lines =
+    if __name__ == .__main__.

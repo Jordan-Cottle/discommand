@@ -1,0 +1,45 @@
+name: CD
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Poetry Install
+      uses: knowsuchagency/poetry-install@v2
+      with:
+        create-virtualenv: true
+    - name: Static analysis
+      run: |
+        poetry run python scripts.py check
+    - name: Run tests
+      run: |
+        poetry run python scripts.py test
+    - name: Build
+      run: |
+        poetry build
+    - name: Check version
+      run: |
+        poetry run python scripts.py check_version
+    - name: TestPublish
+      env:
+        POETRY_PYPI_TOKEN_TESTPYPI: ${{ secrets.TEST_PYPI_TOKEN }}
+        PYPI: testpypi
+      run: |
+        poetry run python scripts.py publish
+    - name: Publish
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        PYPI: pypi
+      run: |
+        poetry run python scripts.py publish

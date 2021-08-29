@@ -12,6 +12,7 @@ include = ["LICENSE"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pydantic = "^1.8.2"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.9.6"
@@ -37,7 +38,16 @@ testpaths = [
     "tests",
 ]
 
-[tool.pylint.messages_control]
-disable = """
-logging-fstring-interpolation,
-"""
+[tool.pylint.master]
+extension-pkg-allow-list= [
+    "pydantic"
+]
+
+[tool.pylint.miscellaneous]
+notes = [
+    "FIXME",
+    "XXX"
+]
+
+[tool.pylint.similarities]
+ignore-imports = "yes"

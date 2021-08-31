@@ -5,7 +5,7 @@ from copy import deepcopy
 import pytest
 from pydantic import ValidationError
 
-from discommand.constants import (
+from discommand.constants.command import (
     MAX_CHOICE_NAME_LENGTH,
     MAX_CHOICE_VALUE_LENGTH,
     MAX_COMMAND_DESCRIPTION_LENGTH,

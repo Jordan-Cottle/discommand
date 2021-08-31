@@ -5,7 +5,7 @@ from typing import List, Optional, Sequence, Union
 
 from pydantic import BaseModel, ConstrainedStr, validator
 
-from .constants import (
+from ..constants.command import (
     MAX_CHOICE_NAME_LENGTH,
     MAX_CHOICE_VALUE_LENGTH,
     MAX_COMMAND_DESCRIPTION_LENGTH,

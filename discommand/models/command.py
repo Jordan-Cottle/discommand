@@ -12,19 +12,9 @@ from ..constants.command import (
     MAX_COMMAND_OPTIONS,
     MAX_OPTION_DESCRIPTION_LENGTH,
     MAX_SUB_COMMAND_OPTIONS,
-    SNOWFLAKE_LENGTH,
     OptionType,
 )
-
-
-class Snowflake(ConstrainedStr):
-    """Twitter snowflake format.
-
-    https://discord.com/developers/docs/reference#snowflakes
-    """
-
-    min_length = SNOWFLAKE_LENGTH
-    max_length = SNOWFLAKE_LENGTH
+from ..models import Snowflake
 
 
 class CommandName(ConstrainedStr):

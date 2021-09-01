@@ -64,3 +64,31 @@ def test_example_user_flags(user_data):
     assert not user_flags.verified_bot
     assert not user_flags.early_verified_bot_developer
     assert not user_flags.discord_certified_moderator
+
+
+@pytest.mark.deep
+@pytest.mark.parametrize(
+    "set_flags",
+    [
+        combination
+        for i in range(1, len(UserFlag))
+        for combination in combinations(UserFlag, i)
+        if UserFlag.NONE not in combination
+    ],
+)
+def test_user_flags(set_flags):
+    """Throughoughly test all combinations of flags."""
+
+    user_flags = UserFlags(sum(set_flags))
+
+    print(f"Testing attribuite access for {set_flags}")
+
+    for flag in UserFlag:
+        if flag in set_flags:
+            assert getattr(user_flags, flag.name)
+            assert getattr(user_flags, flag.name.upper())
+            assert getattr(user_flags, flag.name.lower())
+        else:
+            assert not getattr(user_flags, flag.name)
+            assert not getattr(user_flags, flag.name.upper())
+            assert not getattr(user_flags, flag.name.lower())

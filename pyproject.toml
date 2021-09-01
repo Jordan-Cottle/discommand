@@ -27,10 +27,15 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
+markers = [
+    "deep: marks tests as deep (often more thourough than practical to execute regularly)",
+]
 addopts = [
     "--cov",
     "-vv",
     "--stepwise",
+    "--strict-markers",
+    "-m not deep",
 ]
 log_cli = true
 log_cli_level = "DEBUG"

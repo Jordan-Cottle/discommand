@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from ..constants import InteractionType, OptionType
 from .common import Snowflake
 from .command import CommandName, OptionName
+from .user import User
 
 
 class InteractionDataOption(BaseModel):
@@ -25,7 +26,7 @@ InteractionDataOption.update_forward_refs()
 class InteractionDataResolved(BaseModel):
     """Data container for resolved users, roles, and channels."""
 
-    users: Optional[Mapping[Snowflake, "User"]]
+    users: Optional[Mapping[Snowflake, User]]
     members: Optional[Mapping[Snowflake, "PartialMember"]]
     roles: Optional[Mapping[Snowflake, "Role"]]
     channels: Optional[Mapping[Snowflake, "PartialChannel"]]
@@ -52,7 +53,7 @@ class IncomingInteraction(BaseModel):
     guild_id: Optional[Snowflake]
     channel_id: Optional[Snowflake]
     member: Optional["GuildMember"]
-    user: Optional["User"]
+    user: Optional[User]
     token: str
     version: int
     message: Optional["Message"]

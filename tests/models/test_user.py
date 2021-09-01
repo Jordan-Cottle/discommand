@@ -69,10 +69,10 @@ def test_example_user_flags(user_data):
 @pytest.mark.parametrize(
     "set_flags",
     [
-        set(combination)
+        flag_combination
         for i in range(1, len(UserFlag))
         for combination in combinations(UserFlag, i)
-        if UserFlag.NONE not in combination
+        if UserFlag.NONE not in (flag_combination := set(combination))
     ],
 )
 def test_user_flags(set_flags):
